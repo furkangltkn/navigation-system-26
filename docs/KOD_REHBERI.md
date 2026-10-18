@@ -1,5 +1,16 @@
 # Kodu okuma rehberi
 
+İlk kez inceliyorsan önce [README içindeki dosya okuma sırasını](../README.md#önerilen-dosya-okuma-sırası) takip et. Bu belge, oradaki kısa açıklamaların ayrıntılarını verir.
+
+## Kısa sözlük
+
+- **GPIO / pin:** STM32'nin dış devreyle sinyal alışverişi yaptığı bağlantı.
+- **Görev / task:** Belirli bir işi yürüten, FreeRTOS tarafından zamanlanan fonksiyon.
+- **Kesme / interrupt:** Bir donanım olayı geldiğinde ilgili kodun çalıştırılması; örneğin enkoder sinyalinin değişmesi.
+- **Telemetri:** Ölçüm ve durum bilgilerinin bilgisayara gönderilmesi.
+- **Heap:** Görevler ve diğer nesneler için çalışma sırasında ayrılan bellek alanı.
+- **Stack:** Her görevin fonksiyon çağrıları ve yerel değişkenleri için kullandığı bellek alanı.
+
 ## Başlangıç akışı
 
 `Core/Src/main.c`: `HAL_Init()` → saat → GPIO → 1500 ms bekleme ve I2C hattı kurtarma → I2C1/SPI1/TIM2/USB başlangıcı → TIM2 sayacını başlatma → `osKernelInitialize()` → beş görev oluşturma → `osKernelStart()`.
