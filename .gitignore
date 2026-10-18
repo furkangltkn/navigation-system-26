@@ -1,0 +1,19 @@
+# STM32CubeIDE build products
+Debug/
+Release/
+build/
+*.o
+*.d
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+*.su
+# Machine-local Eclipse/debug state
+.metadata/
+*.launch
+.settings/com.st.stm32cube.ide.mcu.sfrview.prefs
+# OS files
+.DS_Store
+Thumbs.db
