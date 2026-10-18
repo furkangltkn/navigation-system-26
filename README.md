@@ -36,6 +36,22 @@ Dosya adına tıklayarak doğrudan kodu açabilirsin. Uzun dosyalarda belirtilen
 
 Sonra yardımcı fonksiyonlara geç: `MesafeHesapla()` reflektörlerin konumlarını tanımlar, `HAL_GPIO_EXTI_Callback()` enkoder sinyalinin kenarlarını işler, `OlcumuBaslat()` ölçüm değerlerini sıfırlar.
 
+### Diğer dosyalarda özellikle nereye bakacağım?
+
+Her satırdaki **ayrıntılı anlatım**, fonksiyonları “ne yapıyor / neye dikkat edilmeli” biçiminde açıklar.
+
+| Dosya | Önce bu bölümleri incele | Ne öğrenmelisin? |
+| --- | --- | --- |
+| [main.c](Core/Src/main.c) | `main()`, görev `*_attributes` tanımları, `MX_GPIO_Init()`, `MX_TIM2_Init()`, `Error_Handler()` | Açılış sırası, görev belleği/önceliği ve pinlerin ilk hali. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#main-c) |
+| [main.h](Core/Inc/main.h) | `hallSensor`, `Sensor1/2/3`, motor ve fren `_Pin` / `_GPIO_Port` çiftleri | Sinyalin fiziksel pinini nasıl bulacağını öğren. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#main-h) |
+| [onewire.c](Core/Src/onewire.c) / [onewire.h](Core/Inc/onewire.h) | `OneWire_Init()`, `OneWire_Reset()`, ROM arama ve `OneWire_CRC8()` | Sıcaklık sensörünün bulunması ve veri aktarımı. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#onewire) |
+| [FreeRTOSConfig.h](Core/Inc/FreeRTOSConfig.h) | `configTOTAL_HEAP_SIZE`, `configTICK_RATE_HZ`, tahsis ve kesme ayarları | Görevler için ayrılan bellek ve zamanlama. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#rtos-config) |
+| [stm32f4xx_it.c](Core/Src/stm32f4xx_it.c) | `EXTI3_IRQHandler()`, `TIM6_DAC_IRQHandler()`, `OTG_FS_IRQHandler()` | Enkoder, zamanlayıcı ve USB olaylarının hangi koda ulaştığı. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#interrupts) |
+| [stm32f4xx_hal_msp.c](Core/Src/stm32f4xx_hal_msp.c) / [HAL zaman tabanı](Core/Src/stm32f4xx_hal_timebase_tim.c) | `HAL_I2C_MspInit()`, `HAL_SPI_MspInit()`, `HAL_InitTick()` | Çevrebirim pin/saat kurulumu ve HAL zamanı. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#msp-timebase) |
+| [USB arayüzü](USB_DEVICE/App/usbd_cdc_if.c) / [USB başlangıcı](USB_DEVICE/App/usb_device.c) | `MX_USB_DEVICE_Init()`, `CDC_Transmit_FS()`, `CDC_Receive_FS()` | Gönderim ve alım akışı; USB komut işleme şu anda kapalıdır. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#usb) |
+| [madgwick.c](Core/Src/madgwick.c) | `Madgwick_Init()`, `Madgwick_Update()`, `Madgwick_GetEuler()` | Filtrenin arayüzü; mevcut IMU görevi henüz bunu kullanmıyor. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#madgwick) |
+| `.ioc`, `.cproject`, `.project`, `.ld` | Donanım, derleme ve bellek yerleşimi ayarları | Projeyi açma/derleme sırasında bu dosyaların rolü. [Ayrıntılı anlatım](docs/KOD_REHBERI.md#project-config) |
+
 ### Hangi konu için hangi rehberi açmalıyım?
 
 | Yapmak istediğin | Açılacak rehber |
